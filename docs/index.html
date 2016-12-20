@@ -22,12 +22,11 @@
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-1.1/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
-<link rel="stylesheet"
-      href="site_libs/highlight/textmate.css"
-      type="text/css" />
-<script src="site_libs/highlight/highlight.js"></script>
 <style type="text/css">
   pre:not([class]) {
     background-color: white;
@@ -103,7 +102,6 @@ button.code-folding-btn:focus {
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
-<script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
@@ -129,7 +127,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
@@ -188,8 +186,9 @@ div.tocify {
 }
 
 .tocify-subheader .tocify-item {
-  font-size: 0.9em;
-  padding-left: 5px;
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
 }
 
 .tocify .list-group-item {
@@ -201,7 +200,6 @@ div.tocify {
 }
 .tocify-subheader .tocify-item {
   font-size: 0.95em;
-  padding-left: 10px;
 }
 
 </style>
@@ -354,11 +352,15 @@ props &lt;- GetProps(rs$rsid)</code></pre>
 </tr>
 <tr class="even">
 <td><p>Diego Villuendas Pellicero</p></td>
-<td><p><a href="https://github.com/dieguico">GitHub</a> LinkedIn Twitter</p></td>
+<td><p><a href="https://github.com/dieguico">GitHub</a> LinkedIn <a href="https://twitter.com/dieguico">Twitter</a></p></td>
 </tr>
 <tr class="odd">
 <td><p>Jason Morgan</p></td>
 <td><p><a href="https://github.com/framingeinstein">GitHub</a> LinkedIn Twitter</p></td>
+</tr>
+<tr class="even">
+<td><p>Johann De Boer</p></td>
+<td><div style="white-space: pre-line;"><a href="https://github.com/jdeboer">GitHub</a> LinkedIn <a href="https://twitter.com/johannux">Twitter</a></div></td>
 </tr>
 </tbody>
 </table>
@@ -366,6 +368,7 @@ props &lt;- GetProps(rs$rsid)</code></pre>
 <div id="release-notes" class="section level3 toc-ignore">
 <h3>Release Notes</h3>
 <ul>
+<li><a href="http://randyzwitch.com/rsitecatalyst-version-1-4-10-release-notes/">1.4.10</a></li>
 <li><a href="http://randyzwitch.com/rsitecatalyst-bulk-download-version-1-4-9-release-notes/">1.4.9</a></li>
 <li><a href="http://randyzwitch.com/rsitecatalyst-version-1-4-8-release-notes/">1.4.8</a></li>
 <li><a href="http://randyzwitch.com/rsitecatalyst-version-1-4-7-release-notes/">1.4.7/1.4.6</a></li>
@@ -404,6 +407,7 @@ props &lt;- GetProps(rs$rsid)</code></pre>
 <li><a href="http://randyzwitch.com/rsitecatalyst-bulk-download-version-1-4-9-release-notes/">Bulk Downloading Adobe Analytics Data</a></li>
 <li><a href="http://randyzwitch.com/adobe-analytics-implementation-documentation/">Adobe Analytics Implementation Documentation in 60 Seconds</a></li>
 <li><a href="http://maassmedia.com/r-site-catalyst-python.php">HOW TO RUN RSITECATALYST USING JUPYTER MAGICS</a></li>
+<li><a href="http://www.madridgeekgirls.es/rsitecatalyst-o-como-conectar-r-con-sitecatalyst-de-adobe/">RSiteCatalyst o cómo conectar R con SiteCatalyst de Adobe</a></li>
 </ul>
 </div>
 <div id="visualization" class="section level4 toc-ignore">
@@ -412,12 +416,14 @@ props &lt;- GetProps(rs$rsid)</code></pre>
 <li><a href="http://randyzwitch.com/rsitecatalyst-d3-network-graphs/">Visualizing Website Structure With Network Graphs</a></li>
 <li><a href="http://randyzwitch.com/rsitecatalyst-website-pathing-sankey-charts/">Visualizing Website Pathing With Sankey Charts</a></li>
 <li><a href="http://analyticsdemystified.com/analysis/so-r-we-ready-for-r-with-adobe/">SO, R WE READY FOR R WITH ADOBE ANALYTICS?</a></li>
+<li><a href="http://www.ryanpraski.com/real-time-reporting-adobe-analytics-api-tutorial/">Real-Time Reporting Adobe Analytics API Tutorial</a></li>
 </ul>
 </div>
 <div id="general" class="section level4 toc-ignore">
 <h4>General</h4>
 <ul>
 <li><a href="https://blogs.adobe.com/digitalmarketing/analytics/playing-hits-summit-2014-filtered-metrics-error-monitoring/">Playing the Hits at Summit 2014: Filtered Metrics, Error Monitoring, and More</a></li>
+<li><a href="http://www.dartistics.com/api-adobe-analytics.html">Dartistics - The Adobe Analytics API</a></li>
 </ul>
 <hr />
 </div>
@@ -983,13 +989,26 @@ head(props)</code></pre>
 ##   dateGranularity                           metrics
 ## 1             day pageviews, visits, uniquevisitors</code></pre>
 </div>
+<div id="getreportsuitegroups" class="section level4">
+<h4>GetReportSuiteGroups <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getreportsuitegroups-1"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves a list of permission groups assigned to the specified report suite.</p>
+<pre class="r"><code>GetReportSuiteGroups(&quot;zwitchdev&quot;)</code></pre>
+<pre><code>##        rsid     site_title groupid        group_name
+## 1 zwitchdev ZwitchCorp Dev  191843 All Report Access
+##                                                                                                                                                               description
+## 1 Access to all Report Suites, Dimensions, Metrics, Channel Reports, Anomaly Detection, Current Data, Analysis Workspace, My Recommended Reports and Dashboard Reportlets
+##   type
+## 1    0</code></pre>
+</div>
 <div id="getreportsuites" class="section level4">
 <h4>GetReportSuites <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getreportsuites-1"><span class="glyphicon glyphicon-link"</span></a></h4>
 <p>Retrieves all report suites associated with the requesting company.</p>
 <pre class="r"><code>GetReportSuites()</code></pre>
-<pre><code>##          rsid     site_title
-## 1   zwitchdev ZwitchCorp Dev
-## 2 zwitchjulia Julia Bloggers</code></pre>
+<pre><code>##                       rsid     site_title virtual
+## 1                zwitchdev ZwitchCorp Dev      NA
+## 2              zwitchjulia Julia Bloggers      NA
+## 3         vrs_zwitch0_vrs1   zwitchdevVRS    TRUE
+## 4 vrs_zwitch0_zwitchdevvrs  zwitchdevVRS2    TRUE</code></pre>
 </div>
 <div id="getscheduledspike" class="section level4">
 <h4>GetScheduledSpike <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getscheduledspike-1"><span class="glyphicon glyphicon-link"</span></a></h4>
@@ -1002,19 +1021,19 @@ head(props)</code></pre>
 <p>Retrieves the segments that are available in one or more report suites.</p>
 <pre class="r"><code>segments &lt;- GetSegments(rs$rsid)
 head(segments)</code></pre>
-<pre><code>##                         id                       name folder class
-## 1 5433e4e6e4b02df70be4ac63         Visits from Social             
-## 2 54adfe3de4b02df70be5ea08 Visits from Apple Browsers             
-## 3 5538547ae4b0b5455b976a99                   Compound             
-## 4 5433e4e6e4b02df70be4ac63         Visits from Social             
-## 5 54adfe3de4b02df70be5ea08 Visits from Apple Browsers             
-## 6 5538547ae4b0b5455b976a99                   Compound             
+<pre><code>##                                id                       name folder class
+## 1        5433e4e6e4b02df70be4ac63         Visits from Social             
+## 2        54adfe3de4b02df70be5ea08 Visits from Apple Browsers             
+## 3        5538547ae4b0b5455b976a99                   Compound             
+## 4 s14696_58403cbfe4b0bcef55f6e6b5                Last 7 days             
+## 5 s14696_58403d17e4b0bcef55f6e6b6                     Social             
+## 6        5433e4e6e4b02df70be4ac63         Visits from Social             
 ##   suite_enabled read_only report_suite
 ## 1         FALSE     FALSE    zwitchdev
 ## 2         FALSE     FALSE    zwitchdev
 ## 3         FALSE     FALSE    zwitchdev
-## 4         FALSE     FALSE  zwitchjulia
-## 5         FALSE     FALSE  zwitchjulia
+## 4         FALSE     FALSE    zwitchdev
+## 5         FALSE     FALSE    zwitchdev
 ## 6         FALSE     FALSE  zwitchjulia</code></pre>
 </div>
 <div id="getsitetitle" class="section level4">
@@ -1059,6 +1078,13 @@ head(events)</code></pre>
 <pre><code>##          rsid     site_title       template
 ## 1   zwitchdev ZwitchCorp Dev             NA
 ## 2 zwitchjulia Julia Bloggers ZwitchCorp Dev</code></pre>
+</div>
+<div id="gettimestampenabled" class="section level4">
+<h4>GetTimeStampEnabled <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettimezone-1"><span class="glyphicon glyphicon-link"</span></a></h4>
+<pre class="r"><code>GetTimeStampEnabled(c(&quot;zwitchdev&quot;, &quot;zwitchjulia&quot;))</code></pre>
+<pre><code>##          rsid timestampenabled
+## 1   zwitchdev            FALSE
+## 2 zwitchjulia            FALSE</code></pre>
 </div>
 <div id="gettimezone" class="section level4">
 <h4>GetTimeZone <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettimezone-1"><span class="glyphicon glyphicon-link"</span></a></h4>
@@ -1117,6 +1143,21 @@ head(events)</code></pre>
 ##   video_completes_event
 ## 1                    NA
 ## 2                    NA</code></pre>
+</div>
+<div id="getvirtualreportsuitesettings" class="section level4">
+<h4>GetVirtualReportSuiteSettings <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getvirtualreportsuitesettings"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Get definition of virtual report suite (parent report suite and segments applied)</p>
+<pre class="r"><code>GetVirtualReportSuiteSettings(&quot;vrs_zwitch0_vrs1&quot;)</code></pre>
+<pre><code>##               rsid parent_rsid segment_list
+## 1 vrs_zwitch0_vrs1   zwitchdev   All_Visits</code></pre>
+</div>
+<div id="viewprocessingrules" class="section level4">
+<h4>ViewProcessingRules <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>List processing rules for a report suite, along with behaviors that define the rule.</p>
+<pre class="r"><code>#No processing rules defined
+ViewProcessingRules(&quot;zwitchdev&quot;)</code></pre>
+<pre><code>##        rsid title comment rules actions
+## 1 zwitchdev</code></pre>
 <hr />
 </div>
 </div>
@@ -1161,19 +1202,51 @@ report.test3 &lt;- BuildRealTimeReportStructure(report.name=&quot;test789&quot;,
 </div>
 <div id="queuedatawarehouse" class="section level4">
 <h4>QueueDataWarehouse <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue"><span class="glyphicon glyphicon-link"</span></a></h4>
-<pre class="r"><code>#TBD</code></pre>
+<p>QueueDatawarehouse is a method that can both schedule Data Warehouse reports (like in the Adobe Analytics interface), as well as return reports back in the R interface as calculated by Data Warehouse (developmental). For the most part, users should pass the <code>enqueueOnly=TRUE</code> parameters with the <code>ftp</code> parameter to send reports to the FTP.</p>
+<p>API:</p>
+<pre class="r"><code># Because report sent to FTP, returns the report.id value
+QueueDataWarehouse(&quot;zwitchdev&quot;,
+                    &quot;2016-11-01&quot;,
+                    &quot;2016-11-07&quot;,
+                    c(&quot;visits&quot;, &quot;pageviews&quot;),
+                    c(&quot;page&quot;),
+                    enqueueOnly=TRUE,
+                    ftp = list(host = Sys.getenv(&quot;FTP&quot;, &quot;&quot;),
+                              port = &quot;21&quot;,
+                              directory = &quot;/DWtest/&quot;,
+                              username = Sys.getenv(&quot;FTPUSER&quot;, &quot;&quot;),
+                              password = Sys.getenv(&quot;FTPPW&quot;, &quot;&quot;),
+                              filename = &quot;myreport.csv&quot;)
+  )</code></pre>
+<pre><code>## [1] 1677748831</code></pre>
 </div>
 <div id="queuefallout" class="section level4">
 <h4>QueueFallout <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue"><span class="glyphicon glyphicon-link"</span></a></h4>
-<p>Element in the checkpoint parameter.</p>
-<pre class="r"><code>#TBD</code></pre>
+<p>This method generates the underlying data for a Fallout/Pathing report within Adobe Analytics. The API method supports both visits and pageviews as metrics.</p>
+<p>Adobe Analytics Interface: <img src="images/queuefallout.png" /></p>
+<p>API:</p>
+<pre class="r"><code>QueueFallout(&quot;zwitchdev&quot;,
+                   &quot;2016-08-01&quot;,
+                   &quot;2016-12-31&quot;,
+                   metric=&quot;visits&quot;,
+                   element=&quot;page&quot;,
+                   c(&quot;http://randyzwitch.com/r-amazon-ec2&quot;, &quot;http://randyzwitch.com/julia-import-data&quot;))</code></pre>
+<pre><code>## [1] &quot;Requesting URL attempt #1&quot;
+## [1] &quot;Received fallout report.&quot;</code></pre>
+<pre><code>##                                       name
+## 1      http://randyzwitch.com/r-amazon-ec2
+## 2 http://randyzwitch.com/julia-import-data
+##                                        url visits segment.id segment.name
+## 1      http://randyzwitch.com/r-amazon-ec2    701                        
+## 2 http://randyzwitch.com/julia-import-data      0</code></pre>
 </div>
 <div id="queueovertime" class="section level4">
 <h4>QueueOvertime <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue"><span class="glyphicon glyphicon-link"</span></a></h4>
-<p>No elements with a dateGranularity specified.</p>
+<p>This method is analogous to the “Key Metrics” report within Adobe Analytics. Note that the API method does not return the total row, just the metrics by the time breakdown.</p>
+<p>Adobe Analytics Interface: <img src="images/queueovertime.png" /></p>
+<p>API:</p>
 <pre class="r"><code>QueueOvertime(&quot;zwitchdev&quot;, &quot;2016-09-07&quot;, &quot;2016-09-13&quot;, &quot;visits&quot;, date.granularity = &quot;week&quot;)</code></pre>
 <pre><code>## [1] &quot;Requesting URL attempt #1&quot;
-## [1] &quot;Requesting URL attempt #2&quot;
 ## [1] &quot;Received overtime report.&quot;</code></pre>
 <pre><code>##     datetime                                  name year month day
 ## 1 2016-09-07 Wed.  7 Sep. 2016 - Sat. 10 Sep. 2016 2016     9   7
@@ -1184,7 +1257,9 @@ report.test3 &lt;- BuildRealTimeReportStructure(report.name=&quot;test789&quot;,
 </div>
 <div id="queuepathing" class="section level4">
 <h4>QueuePathing <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue"><span class="glyphicon glyphicon-link"</span></a></h4>
-<p>Element in the pattern parameter.</p>
+<p>QueuePathing is the API method that calculates the underlying data for NextPage, Fallout and other path-related reports within Adobe Analytics.</p>
+<p>Adobe Analytics Interface: <img src="images/queuepathing.png" /></p>
+<p>API:</p>
 <pre class="r"><code>pathpattern &lt;- c(&quot;::anything::&quot;, &quot;::anything::&quot;)
 QueuePathing(&quot;zwitchdev&quot;,
             &quot;2016-09-19&quot;,
@@ -1194,7 +1269,6 @@ QueuePathing(&quot;zwitchdev&quot;,
             pathpattern,
             top = 5)</code></pre>
 <pre><code>## [1] &quot;Requesting URL attempt #1&quot;
-## [1] &quot;Requesting URL attempt #2&quot;
 ## [1] &quot;Received pathing report.&quot;</code></pre>
 <pre><code>##                                                       step.1
 ## 1 http://randyzwitch.com/broken-macbook-pro-hinge-fixed-free
@@ -1217,39 +1291,50 @@ QueuePathing(&quot;zwitchdev&quot;,
 </div>
 <div id="queueranked" class="section level4">
 <h4>QueueRanked <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue"><span class="glyphicon glyphicon-link"</span></a></h4>
-<p>1 or more elements with no dateGranularity specified.</p>
-<pre class="r"><code>QueueRanked(&quot;zwitchdev&quot;, &quot;2016-09-01&quot;, &quot;2016-09-19&quot;, &quot;pageviews&quot;, &quot;page&quot;, top = 6, data.current = TRUE)</code></pre>
+<p>QueueRanked represents the data from a ranked report within Adobe Analytics, where one or more elements is specified with no dateGranularity. Note that the API method does not return the total row, just the metrics by the breakdown(s) specified.</p>
+<p>Adobe Analytics Interface: <img src="images/queueranked.png" /></p>
+<pre class="r"><code>QueueRanked(&quot;zwitchdev&quot;, &quot;2016-10-01&quot;, &quot;2016-10-31&quot;, &quot;pageviews&quot;, &quot;page&quot;, top = 10)</code></pre>
 <pre><code>## [1] &quot;Requesting URL attempt #1&quot;
-## [1] &quot;Requesting URL attempt #2&quot;
 ## [1] &quot;Received ranked report.&quot;</code></pre>
-<pre><code>##                                                         name
-## 1 http://randyzwitch.com/broken-macbook-pro-hinge-fixed-free
-## 2  http://randyzwitch.com/creating-stacked-bar-chart-seaborn
-## 3                                     http://randyzwitch.com
-## 4          http://randyzwitch.com/hive-five-hard-won-lessons
-## 5                   http://randyzwitch.com/julia-import-data
-## 6         http://randyzwitch.com/hadoop-creating-tables-hive
-##                                                          url pageviews
-## 1 http://randyzwitch.com/broken-macbook-pro-hinge-fixed-free       852
-## 2  http://randyzwitch.com/creating-stacked-bar-chart-seaborn       407
-## 3                                     http://randyzwitch.com       372
-## 4          http://randyzwitch.com/hive-five-hard-won-lessons       292
-## 5                   http://randyzwitch.com/julia-import-data       181
-## 6         http://randyzwitch.com/hadoop-creating-tables-hive       172
-##   segment.id segment.name
-## 1                        
-## 2                        
-## 3                        
-## 4                        
-## 5                        
-## 6</code></pre>
+<pre><code>##                                                            name
+## 1    http://randyzwitch.com/broken-macbook-pro-hinge-fixed-free
+## 2     http://randyzwitch.com/creating-stacked-bar-chart-seaborn
+## 3                                        http://randyzwitch.com
+## 4           http://randyzwitch.com/wordpress-jekyll-30x-speedup
+## 5             http://randyzwitch.com/hive-five-hard-won-lessons
+## 6            http://randyzwitch.com/hadoop-creating-tables-hive
+## 7                      http://randyzwitch.com/julia-import-data
+## 8  http://randyzwitch.com/creating-dummy-variables-data-frame-r
+## 9          http://randyzwitch.com/line-numbers-ipython-notebook
+## 10     http://randyzwitch.com/disable-mobile-theme-in-wordpress
+##                                                             url pageviews
+## 1    http://randyzwitch.com/broken-macbook-pro-hinge-fixed-free       887
+## 2     http://randyzwitch.com/creating-stacked-bar-chart-seaborn       640
+## 3                                        http://randyzwitch.com       567
+## 4           http://randyzwitch.com/wordpress-jekyll-30x-speedup       445
+## 5             http://randyzwitch.com/hive-five-hard-won-lessons       346
+## 6            http://randyzwitch.com/hadoop-creating-tables-hive       310
+## 7                      http://randyzwitch.com/julia-import-data       286
+## 8  http://randyzwitch.com/creating-dummy-variables-data-frame-r       195
+## 9          http://randyzwitch.com/line-numbers-ipython-notebook       195
+## 10     http://randyzwitch.com/disable-mobile-theme-in-wordpress       166
+##    segment.id segment.name
+## 1                         
+## 2                         
+## 3                         
+## 4                         
+## 5                         
+## 6                         
+## 7                         
+## 8                         
+## 9                         
+## 10</code></pre>
 </div>
 <div id="queuesummary" class="section level4">
 <h4>QueueSummary <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue"><span class="glyphicon glyphicon-link"</span></a></h4>
-<p>No “reportSuiteID” parameter, instead “reportsuite” is specified as the report element and the “selected” parameter contains a list of report suite IDs.</p>
+<p>QueueSummary does not map to an interface report per se; rather, QueueSummary provides the total calculation row for many reports within Adobe Analytics. It is this method that will provide ’unique` calculations such as visitors, which would be incorrectly summed across an element such as page views.</p>
 <pre class="r"><code>QueueSummary(rs$rsid, &quot;2016-09-01&quot;, &quot;visits&quot;)</code></pre>
 <pre><code>## [1] &quot;Requesting URL attempt #1&quot;
-## [1] &quot;Requesting URL attempt #2&quot;
 ## [1] &quot;Received summary report.&quot;</code></pre>
 <pre><code>##              period reportsuite url visits
 ## 1 Thu.  1 Sep. 2016   zwitchdev        294
@@ -1257,10 +1342,11 @@ QueuePathing(&quot;zwitchdev&quot;,
 </div>
 <div id="queuetrended" class="section level4">
 <h4>QueueTrended <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue"><span class="glyphicon glyphicon-link"</span></a></h4>
-<p>1 or more elements with a dateGranularity specified.</p>
+<p>QueueTrended is similar to a QueueOvertime report, except instead of just having a metric by time granularity, you can specify an element to trend. One notable feature for the API method is that it removes the restriction of five element values to be trended over time (i.e. Top 5 pages over time)</p>
+<p>Adobe Analytics Interface: <img src="images/queuetrended.png" /></p>
+<p>API:</p>
 <pre class="r"><code>QueueTrended(&quot;zwitchdev&quot;, &quot;2016-09-07&quot;, &quot;2016-09-13&quot;, &quot;visits&quot;, &quot;page&quot;, selected = c(&quot;http://randyzwitch.com&quot;))</code></pre>
 <pre><code>## [1] &quot;Requesting URL attempt #1&quot;
-## [1] &quot;Requesting URL attempt #2&quot;
 ## [1] &quot;Received trended report.&quot;</code></pre>
 <pre><code>##     datetime                   name                    url visits
 ## 1 2016-09-07 http://randyzwitch.com http://randyzwitch.com      8
@@ -1307,8 +1393,11 @@ QueuePathing(&quot;zwitchdev&quot;,
 <script>
 
 // add bootstrap table styles to pandoc tables
-$(document).ready(function () {
+function bootstrapStylePandocTables() {
   $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
 });
 
 

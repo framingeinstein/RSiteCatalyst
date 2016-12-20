@@ -4,3 +4,5 @@
 README.md
 travis-tool.sh
 docs
+.nojekyll
+^appveyor\.yml$
